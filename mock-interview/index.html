@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mock Interview Platform</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4f46e5', // indigo-600
+                        secondary: '#1e293b', // slate-800
+                        accent: '#0ea5e9', // sky-500
+                        pastelBg: '#f0fdf4', // green-50
+                        pastelText: '#166534', // green-800
+                        pastelAccent: '#fce7f3', // pink-100
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased min-h-screen flex flex-col transition-colors duration-500" id="app-body">
+    
+    <!-- Navbar -->
+    <header class="w-full p-6 flex justify-between items-center z-20 sticky top-0 bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm transition-colors duration-500 var-header-bg">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.reload()">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-xl shadow-lg var-logo-bg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <h1 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent var-logo-text">MockPro AI</h1>
+        </div>
+        <button id="nav-btn-dashboard" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors px-4 py-2 rounded-full hover:bg-gray-100 var-btn-nav">Dashboard</button>
+    </header>
+
+    <!-- Main App Container -->
+    <main id="app" class="flex-grow w-full relative overflow-x-hidden overflow-y-auto flex flex-col items-center p-4 pt-12 pb-12">
+        
+        <!-- 1. Homepage View -->
+        <section id="view-home" class="w-full max-w-4xl flex flex-col items-center text-center fade-in">
+            <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 mb-6 leading-tight var-title-text">
+                Ace Your Next <br/> <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent var-highlight-text">Interview</span>
+            </h2>
+            <p class="text-lg text-gray-600 mb-10 max-w-2xl mx-auto var-subtitle-text">
+                Practice with our AI-driven mock interview simulator. Get immediate feedback, compare your responses to ideal answers, and track your progress.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button id="btn-start-practice" class="px-8 py-4 bg-primary hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-indigo-500/30 transition-all transform hover:-translate-y-0.5 text-lg var-btn-primary">Start Practice Now</button>
+                <button id="btn-view-dashboard" class="px-8 py-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-800 font-bold rounded-xl shadow-sm transition-all transform hover:-translate-y-0.5 text-lg var-card-bg">View Dashboard</button>
+            </div>
+            
+            <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 w-full text-left">
+                <div class="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow var-card-bg">
+                    <div class="w-12 h-12 bg-indigo-50 text-primary rounded-xl flex items-center justify-center mb-5 var-icon-bg-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2 text-lg var-title-text">Live Camera Feed</h3>
+                    <p class="text-gray-500 var-subtitle-text">Practice maintaining eye contact and posture with live local camera mirroring.</p>
+                </div>
+                <div class="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow var-card-bg">
+                    <div class="w-12 h-12 bg-sky-50 text-accent rounded-xl flex items-center justify-center mb-5 var-icon-bg-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2 text-lg var-title-text">Role Selection</h3>
+                    <p class="text-gray-500 var-subtitle-text">Choose between HR behavioral or Technical questions crafted by industry experts.</p>
+                </div>
+                <div class="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow var-card-bg">
+                    <div class="w-12 h-12 bg-green-50 text-green-600 rounded-xl flex items-center justify-center mb-5 var-icon-bg-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2 text-lg var-title-text">Shy Student Mode</h3>
+                    <p class="text-gray-500 var-subtitle-text">Turn on for an encouraging AI buddy and calming pastel colors to reduce stress.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Setup Page View -->
+        <section id="view-setup" class="hidden w-full max-w-3xl flex flex-col items-center fade-in-up">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-3 var-title-text">Select Interview Type</h2>
+            <p class="text-lg text-gray-500 mb-8 var-subtitle-text">Choose the role you want to practice for today.</p>
+            
+            <!-- Shy Student Mode Toggle -->
+            <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5 mb-8 w-full max-w-lg flex justify-between items-center transition-all duration-300 var-shy-box var-card-bg hover:shadow-sm cursor-pointer" id="shy-toggle-container">
+                <div class="flex flex-col">
+                    <span class="font-bold text-gray-800 flex items-center gap-2 text-lg var-title-text">
+                        🌸 Shy Student Mode
+                    </span>
+                    <span class="text-xs sm:text-sm text-gray-500 mt-1 var-subtitle-text">Enable calming colors and encouraging AI tips.</span>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer pointer-events-none">
+                    <input type="checkbox" id="toggle-shy-mode" class="sr-only peer">
+                    <div class="w-14 h-7 bg-gray-300 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-pink-400"></div>
+                </label>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                <!-- HR Role -->
+                <button class="role-btn group p-8 bg-white border-2 border-gray-100 shadow-sm hover:shadow-xl hover:border-primary rounded-2xl transition-all text-left flex flex-col relative overflow-hidden focus:outline-none focus:ring-4 focus:ring-indigo-500/50 var-card-bg var-card-border" data-role="hr">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full translate-x-10 -translate-y-10 group-hover:scale-150 transition-transform duration-500 ease-out z-0 var-icon-bg-1"></div>
+                    <div class="z-10 w-16 h-16 bg-indigo-100 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:-translate-y-1 transition-transform var-icon-bg-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 z-10 group-hover:text-primary transition-colors var-title-text">HR & Behavioral</h3>
+                    <p class="text-gray-500 text-sm flex-grow z-10 leading-relaxed var-subtitle-text">Common behavioral questions to assess culture fit, soft skills, communication, and past experiences.</p>
+                </button>
+
+                <!-- Technical Role -->
+                <button class="role-btn group p-8 bg-white border-2 border-gray-100 shadow-sm hover:shadow-xl hover:border-accent rounded-2xl transition-all text-left flex flex-col relative overflow-hidden focus:outline-none focus:ring-4 focus:ring-sky-500/50 var-card-bg var-card-border" data-role="technical">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-sky-50 rounded-full translate-x-10 -translate-y-10 group-hover:scale-150 transition-transform duration-500 ease-out z-0 var-icon-bg-2"></div>
+                    <div class="z-10 w-16 h-16 bg-sky-100 text-accent rounded-2xl flex items-center justify-center mb-6 group-hover:-translate-y-1 transition-transform var-icon-bg-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 z-10 group-hover:text-accent transition-colors var-title-text">Technical</h3>
+                    <p class="text-gray-500 text-sm flex-grow z-10 leading-relaxed var-subtitle-text">Core technical questions diving into JavaScript, frontend concepts, system design, and coding logic.</p>
+                </button>
+            </div>
+            
+            <button id="btn-back-home" class="mt-12 text-gray-400 hover:text-gray-800 font-medium transition-colors flex items-center group var-btn-nav">
+                <span class="mr-2 group-hover:-translate-x-1 transition-transform">←</span> Back to Home
+            </button>
+        </section>
+
+        <!-- 3. Interview Screen View -->
+        <section id="view-interview" class="hidden w-full max-w-6xl flex flex-col fade-in relative">
+            
+            <!-- AI Buddy Tooltip (Hidden initially) -->
+            <div id="ai-buddy" class="hidden absolute right-0 -top-24 md:-right-4 md:-top-16 z-30 opacity-0 transition-opacity duration-300 pointer-events-none">
+                <div class="relative bg-white border border-pink-200 shadow-xl rounded-2xl p-4 w-56 animate-bounce-slow">
+                    <div class="absolute -bottom-3 right-6 w-4 h-4 bg-white border-b border-r border-pink-200 transform rotate-45"></div>
+                    <p id="ai-buddy-text" class="text-sm font-semibold text-pink-600 text-center leading-relaxed">You got this, breathe!</p>
+                </div>
+                <div class="w-14 h-14 bg-pink-100 rounded-full flex items-center justify-center text-3xl shadow-sm border-4 border-white mt-4 ml-auto mr-4">🤖</div>
+            </div>
+
+            <!-- 2-Column Desktop Grid for Question/Answer vs Camera -->
+            <div class="flex flex-col lg:flex-row gap-6 w-full">
+                
+                <!-- Left Column: Question & Answer Area -->
+                <div class="flex-grow flex flex-col w-full lg:w-2/3">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4">
+                        <div class="w-full md:w-3/4">
+                            <span id="interview-progress" class="text-sm font-bold text-primary uppercase tracking-wider mb-1 block var-progress-text">Question 1 of 3</span>
+                            <h2 id="question-text" class="text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight var-title-text">Loading question...</h2>
+                        </div>
+                        <div class="flex flex-col items-center bg-white px-5 py-3 rounded-xl shadow-sm border border-gray-100 min-w-[120px] shrink-0 pointer-events-none var-card-bg var-card-border">
+                            <span class="text-xs text-gray-400 font-bold tracking-widest uppercase mb-1 var-subtitle-text">Time Left</span>
+                            <div id="timer-display" class="text-2xl font-black text-gray-800 tabular-nums font-mono tracking-tight var-title-text">02:00</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-2 mb-6 flex-grow flex flex-col focus-within:ring-2 focus-within:ring-primary/40 focus-within:border-primary transition-all relative var-card-bg var-card-border var-focus-ring w-[100%] max-w-[100%] mx-auto">
+                        <textarea id="answer-input" class="w-full h-[40vh] min-h-[300px] p-4 text-gray-700 text-lg resize-none outline-none rounded-xl bg-transparent var-title-text" placeholder="Type your answer here or click Start Recording..." spellcheck="false"></textarea>
+                        
+                        <!-- Recording controls -->
+                        <div class="absolute bottom-4 left-4 flex gap-3 items-center">
+                            <button id="btn-record" class="flex items-center gap-2 bg-gray-100 hover:bg-red-50 text-gray-700 hover:text-red-600 border border-gray-200 hover:border-red-200 font-bold text-sm px-4 py-2 rounded-lg transition-colors shadow-sm focus:outline-none z-10">
+                                <span id="record-icon-container" class="relative flex h-3 w-3">
+                                    <span id="record-ping" class="absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75 hidden"></span>
+                                    <span id="record-dot" class="relative inline-flex rounded-full h-3 w-3 bg-gray-400"></span>
+                                </span>
+                                <span id="record-text">Start Recording</span>
+                            </button>
+                            <span id="record-status" class="text-xs font-medium text-red-500 animate-pulse hidden">Listening...</span>
+                        </div>
+                        <div class="absolute bottom-5 right-5 text-xs text-gray-400 font-medium var-subtitle-text">No Markdown</div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Live Camera Feed -->
+                <div class="w-full lg:w-1/3 flex flex-col mt-4 lg:mt-[5.5rem]">
+                    <div class="bg-gray-900 rounded-2xl shadow-sm border border-gray-200/50 overflow-hidden relative flex-grow min-h-[300px] flex items-center justify-center var-card-border">
+                        <!-- Camera Feed Element -->
+                        <video id="camera-feed" class="absolute inset-0 w-full h-full object-cover transform -scale-x-100 hidden" autoplay muted playsinline></video>
+                        
+                        <!-- Placeholder while loading or if permission denied -->
+                        <div id="camera-placeholder" class="text-center z-10 p-6 flex flex-col items-center justify-center opacity-80 transition-opacity">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-500 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                            <span id="camera-status-text" class="text-sm font-medium text-gray-400 uppercase tracking-widest">Requesting Camera...</span>
+                            <button id="btn-retry-camera" class="hidden mt-4 text-xs font-bold bg-gray-800 text-white px-3 py-1.5 rounded-md hover:bg-gray-700">Retry Camera</button>
+                        </div>
+                        
+                        <!-- Live Indicator -->
+                        <div id="camera-live-indicator" class="absolute top-4 right-4 z-10 flex items-center gap-2 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full hidden">
+                            <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+                            <span class="text-xs font-bold text-white uppercase tracking-wider">Live</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-center text-gray-500 mt-3 var-subtitle-text">Your camera feed remains entirely local and is never uploaded.</p>
+                </div>
+            </div>
+
+            <!-- Footer Buttons -->
+            <div class="flex justify-between items-center w-full mt-2">
+                <button id="btn-quit" class="text-gray-400 hover:text-red-500 font-medium transition-colors var-subtitle-text">Quit Session</button>
+                <div class="flex space-x-3">
+                    <button id="btn-next" class="px-8 py-3 bg-primary hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md hover:shadow-xl transition-all flex items-center var-btn-primary">
+                        Next Question <span class="ml-2">→</span>
+                    </button>
+                    <button id="btn-submit" class="hidden px-8 py-3 bg-gray-900 hover:bg-black text-white font-bold rounded-xl shadow-md hover:shadow-xl transition-all">
+                        Finish Interview
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Result Page View -->
+        <section id="view-result" class="hidden w-full max-w-5xl flex flex-col fade-in-up">
+            <div class="text-center mb-10">
+                <div class="inline-flex items-center justify-center w-24 h-24 bg-green-50 text-green-500 rounded-full mb-6 shadow-sm border-4 border-white var-icon-bg-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                </div>
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-3 var-title-text">Interview Completed!</h2>
+                <p class="text-lg text-gray-500 var-subtitle-text">Here is a detailed breakdown of your performance.</p>
+            </div>
+
+            <!-- Global Scores Grid: Answer Content vs Artificial Body Language -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Answer Content Score (Existing Logic) -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center relative overflow-hidden var-card-bg var-card-border">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent var-logo-bg"></div>
+                    <span class="block text-sm text-gray-400 uppercase tracking-widest font-bold mb-2 var-subtitle-text">Answer Content Score</span>
+                    <span id="overall-score" class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary to-accent tracking-tighter var-logo-text">--%</span>
+                    <p class="text-sm text-gray-500 mt-4 text-center var-subtitle-text">Based on keyword density, logical structure, and response length.</p>
+                </div>
+
+                <!-- Body Language Analysis (Simulated) -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-center relative overflow-hidden var-card-bg var-card-border">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 to-rose-400"></div>
+                    <span class="block text-sm text-gray-400 uppercase tracking-widest font-bold mb-6 text-center var-subtitle-text">Confidence Level & Body Language</span>
+                    
+                    <div class="w-full mb-6">
+                        <div class="flex justify-between text-sm font-bold text-gray-700 mb-2 var-title-text">
+                            <span>👁️ Eye Contact</span>
+                            <span id="eye-contact-score">--%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-3">
+                            <div id="eye-contact-bar" class="bg-pink-500 h-3 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="w-full">
+                        <div class="flex justify-between text-sm font-bold text-gray-700 mb-2 var-title-text">
+                            <span>🧍 Default Posture</span>
+                            <span id="posture-score">--%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-3">
+                            <div id="posture-bar" class="bg-rose-400 h-3 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full flex justify-between items-end border-b border-gray-200 pb-2 mb-6">
+                <h3 class="font-bold text-gray-900 text-xl var-title-text">Detailed Answer Review</h3>
+                <span class="text-sm text-gray-500 font-medium var-subtitle-text">Compare with Ideal Answer</span>
+            </div>
+
+            <div id="results-container" class="space-y-8 mb-12 w-full">
+                <!-- Result items injected via JS -->
+            </div>
+
+            <div class="flex justify-center flex-col sm:flex-row gap-4 pb-12 p-4">
+                <button id="btn-restart" class="px-10 py-4 bg-gray-900 hover:bg-black text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1">Start New Session</button>
+                <button id="btn-result-dashboard" class="px-10 py-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-800 font-bold rounded-xl shadow-sm transition-all transform hover:-translate-y-1 var-card-bg var-card-border var-title-text">View Dashboard</button>
+            </div>
+        </section>
+
+        <!-- 5. Dashboard View -->
+        <section id="view-dashboard" class="hidden w-full max-w-4xl flex flex-col fade-in-up">
+            <div class="flex justify-between items-center mb-8 border-b border-gray-200 pb-4">
+                <div>
+                    <h2 class="text-3xl font-extrabold text-gray-900 var-title-text">Your Dashboard</h2>
+                    <p class="text-gray-500 var-subtitle-text">Track your interview performance over time.</p>
+                </div>
+                <button id="btn-dash-home" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors px-4 py-2 rounded-lg hover:bg-gray-100 var-btn-nav">Return Home</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 text-center">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 var-card-bg var-card-border flex flex-col items-center justify-center">
+                    <span class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2 var-subtitle-text">Total Sessions</span>
+                    <span id="dash-total-sessions" class="text-5xl font-black text-gray-800 var-title-text">0</span>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 var-card-bg var-card-border flex flex-col items-center justify-center">
+                    <span class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2 var-subtitle-text">Avg. Score</span>
+                    <span id="dash-avg-score" class="text-5xl font-black text-primary var-highlight-text">0%</span>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-900 var-title-text">Past Sessions</h3>
+                <button id="btn-clear-history" class="text-xs font-bold text-red-500 uppercase tracking-widest hover:text-red-700 hover:underline underline-offset-4 transition-colors">Clear History</button>
+            </div>
+            
+            <div id="session-history-list" class="space-y-4 w-full content-start">
+                <!-- History items injected here via JS -->
+                <div class="text-center text-gray-400 italic py-8 var-subtitle-text" id="dash-empty-state">No sessions completed yet. Start practicing!</div>
+            </div>
+        </section>
+
+    </main>
+
+    <script type="module" src="./src/main.js"></script>
+</body>
+</html>

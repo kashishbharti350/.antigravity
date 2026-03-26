@@ -1,0 +1,81 @@
+/* Custom utility classes and animations */
+
+@layer utilities {
+    .glass-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* AI Buddy Animation */
+.animate-bounce-slow {
+    animation: bounceSlow 3s ease-in-out infinite;
+}
+
+@keyframes bounceSlow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* Custom Scrollbar for Textarea */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ------------------------------------- */
+/* Shy Student Mode Theme Overrides      */
+/* ------------------------------------- */
+
+body.shy-mode {
+    background-color: #f0fdf4 !important; /* Pastel Green bg */
+}
+
+body.shy-mode .var-header-bg { background-color: rgba(255, 255, 255, 0.6) !important; }
+body.shy-mode .var-logo-bg { background: linear-gradient(to bottom right, #34d399, #6ee7b7) !important; }
+body.shy-mode .var-logo-text { background-clip: text; color: transparent; background-image: linear-gradient(to right, #059669, #10b981) !important; }
+body.shy-mode .var-btn-nav { color: #065f46 !important; }
+body.shy-mode .var-btn-nav:hover { background-color: #d1fae5 !important; }
+
+body.shy-mode .var-title-text { color: #064e3b !important; }
+body.shy-mode .var-highlight-text { background-clip: text; color: transparent; background-image: linear-gradient(to right, #059669, #10b981) !important; }
+body.shy-mode .var-subtitle-text { color: #047857 !important; }
+
+body.shy-mode .var-btn-primary { background-color: #10b981 !important; color: white !important; }
+body.shy-mode .var-btn-primary:hover { background-color: #059669 !important; box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3) !important; }
+
+body.shy-mode .var-card-bg { background-color: #ffffff !important; }
+body.shy-mode .var-card-border { border-color: #d1fae5 !important; }
+body.shy-mode .var-card-border:hover { border-color: #6ee7b7 !important; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1) !important; }
+
+body.shy-mode .var-icon-bg-1 { background-color: #d1fae5 !important; color: #059669 !important; }
+body.shy-mode .var-icon-bg-2 { background-color: #fce7f3 !important; color: #db2777 !important; }
+body.shy-mode .var-icon-bg-3 { background-color: #fef3c7 !important; color: #d97706 !important; }
+
+body.shy-mode .var-focus-ring:focus-within {
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.4) !important;
+    border-color: #10b981 !important;
+}
+
+body.shy-mode .var-progress-text { color: #059669 !important; }
